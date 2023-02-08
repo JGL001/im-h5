@@ -4,13 +4,12 @@
   
 <script setup lang='ts'>
 import { getCurrentInstance, onMounted } from 'vue'
-const { proxy } = getCurrentInstance();
-// 
+const instance: any = getCurrentInstance();
 // console.log(123123, proxy?.$socket)
 
 onMounted(() => {
   if (localStorage.getItem("userId")) {
-    proxy?.$socket.connect();
+    instance?.proxy?.$socket.connect();
   }
 })
 

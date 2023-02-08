@@ -51,7 +51,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter()
 
-const { proxy } = getCurrentInstance();
+const instance: any = getCurrentInstance();
 
 const targetId = computed(() => router.currentRoute.value.query.targetId)
 const targetName = computed(() => router.currentRoute.value.query.targetName)
@@ -87,7 +87,7 @@ const sendMsg = () => {
         targetId: Number(targetId.value),
         chatType: 1,
     }
-    proxy.$socket.send(msg)
+    instance?.proxy?.$socket.send(msg)
     list.value.push(msg)
     value.value = ''
 }
@@ -101,7 +101,7 @@ onMounted(() => {
     // for (let i = 0; i < 30; i++) {
     //     list.value.push({ nickName: `小白${i}`, lastTime: "12:12", lastMsg: "你好", msgId: i });
     // }
-    proxy.$socket.registerCallBack("1", recvMsg)
+    instance?.proxy?.$socket.registerCallBack("1", recvMsg)
 })
 
 
